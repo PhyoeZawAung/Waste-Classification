@@ -2,5 +2,5 @@ matplotlib
 numpy
 tensorflow
 PIL
-streamlit_extras
+streamlit-extras
 streamlit
