@@ -1,0 +1,5 @@
+matplotlib
+numpy
+tensorflow
+PIL
+streamlit_extra
