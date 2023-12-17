@@ -21,9 +21,10 @@ def predict(image_data, model):
         return pred_prob
 
 def main():
-    st.title("Classify page")   
+    st.title("Classify the waste")
     class_names = ['battery', 'biological', 'cardboard', 'clothes', 'glass', 'metal', 'paper', 'plastic', 'shoes', 'trash']
     model = load_model()
+    # model.summary(print_fn=lambda x: st.text(x))
     uploaded_image = st.file_uploader("Upload an image", type=["jpg", "png", "jpeg"])
             
     if uploaded_image is not None:
@@ -31,8 +32,13 @@ def main():
         st.image(image, caption="Uploaded Image")
         with st.spinner("Classifying...."):
             prediction = predict(image, model)
-            pred_class = class_names[prediction.argmax()]
-            st.write(pred_class,prediction[0][prediction.argmax()] * 100)
+            max_prediction_class = prediction.argmax()
+            max_prediction = prediction[0][max_prediction_class] * 100
+            if(max_prediction > 80):  
+                pred_class = class_names[max_prediction_class]
+                st.write(pred_class, max_prediction)
+            else:
+                 st.write("Cannot classify the image")
     else:
         st.info("Please upload an image to classify")
 if __name__ == "__main__":
